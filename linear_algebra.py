@@ -63,4 +63,8 @@ def matrix_vector_multiply(matrix, vector):
     return [dot(item1, vector) for item1 in matrix]
 
 def matrix_matrix_multiply(matrix, matrix2):
-    return [[dot(item1, item2)for item1, item2 in v] for i, v in zip(matrix, matrix2)]
+    compare_shape(matrix_row(matrix, 0), matrix_col(matrix2, 0))
+    #This is rough, I'm gonna try to think this one into something cleaner
+    return [[dot(matrix_row(matrix, item1), matrix_col(matrix2, item2))
+        for item2 in range(len(matrix_row(matrix2, 0)))]
+        for item1 in range(len(matrix_col(matrix, 0)))]
